@@ -1,0 +1,100 @@
+{
+  "name": "phishing-education-app",
+  "version": "1.0.0",
+  "description": "Edukacyjna aplikacja do nauki o phishingu dla osób starszych",
+  "author": "Marek Piłat",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "electron-is-dev": "^2.0.0"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest",
+    "concurrently": "^latest",
+    "wait-on": "^latest"
+  },
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-dev": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "npm run react-build && electron-builder",
+    "electron-build-win": "npm run react-build && electron-builder --win --publish=never",
+    "electron-build-linux": "npm run react-build && electron-builder --linux --publish=never",
+    "electron-build-all": "npm run react-build && electron-builder -mwl --publish=never",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-portable": "npm run react-build && electron-builder --win portable --publish=never",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.marekpilat.phishingedu",
+    "productName": "CzasPhishingEdu",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/electron.js",
+      "public/preload.js"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CzasPhishingEdu"
+    },
+    "portable": {
+      "artifactName": "CzasPhishingEdu.exe"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Education"
+    },
+    "appImage": {
+      "artifactName": "CzasPhishingEdu.AppImage"
+    }
+  }
+}
