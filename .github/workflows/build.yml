@@ -1,3 +1,4 @@
+cat > .github/workflows/build.yml << 'EOF'
 name: Build CzasPhishingEdu
 
 on:
@@ -33,3 +34,4 @@ jobs:
         files: dist/CzasPhishingEdu.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+EOF
